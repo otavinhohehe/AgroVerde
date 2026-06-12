@@ -1,1 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agro Verde- Simulador Avançado de Gestão Sustentável</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="intro-screen" class="overlay">
+    <div class="modal intro-modal">
+        <h2>🌾 Agro Verde</h2>
+        
+        <div class="intro-story">
+            <p>Você assumiu a gestão da Fazenda Primavera, no Paraná. Seu desafio é provar que é possível produzir com alta rentabilidade e, ao mesmo tempo, proteger o meio ambiente.</p>
+        </div>
 
+        <h3>🛠️ Como Funciona o Jogo:</h3>
+        <ul class="intro-rules">
+            <li><strong>Gerencie 4 Lotes:</strong> Clique em cada lote no mapa para definir a estratégia da terra (Soja, Rotação ou Floresta).</li>
+            <li><strong>Monitore os Recursos:</strong> Fique de olho na Água e na Biodiversidade. Se qualquer um deles chegar a 0%, você perde por <strong>Falência Ecológica</strong>.</li>
+            <li><strong>Evolua a Fazenda:</strong> Use os lucros da colheita para comprar Upgrades Tecnológicos na loja e se proteger de eventos climáticos como secas.</li>
+            <li><strong>Objetivo:</strong> Prosperar financeiramente durante <strong>6 anos</strong> mantendo a natureza intacta.</li>
+        </ul>
+
+        <button id="btn-comecar" class="btn-primary" style="margin-top: 1.5rem;">Começar Gestão Sustentável</button>
+    </div>
+</div>
+    <header class="main-header">
+        <div class="header-content">
+            <h1>AgroVerde Pro</h1>
+            <p>Gestão de Ecossistemas e Créditos de Carbono v2.0</p>
+        </div>
+        <div class="global-turn-box">
+            <span>ANO DE GESTÃO</span>
+            <p id="txt-ano">1 / 6</p>
+        </div>
+    </header>
+
+    <main class="main-layout">
+        
+        <aside class="sidebar-metrics">
+            <h2>Painel de Indicadores</h2>
+            
+            <div class="metric-group">
+                <label>Capital de Caixa:</label>
+                <p class="metric-value positive">R$ <span id="m-dinheiro">1500</span></p>
+            </div>
+
+            <div class="metric-group">
+                <label>Balanço de Carbono:</label>
+                <p class="metric-value" id="box-carbono"><span id="m-carbono">0</span> toneladas</p>
+            </div>
+
+            <div class="metric-group">
+                <label>Biodiversidade Global:</label>
+                <div class="bar-container"><div id="bar-biodiv" class="bar-fill green"></div></div>
+                <p class="bar-text"><span id="m-biodiv">100</span>%</p>
+            </div>
+
+            <div class="metric-group">
+                <label>Lençol Freático (Água):</label>
+                <div class="bar-container"><div id="bar-agua" class="bar-fill blue"></div></div>
+                <p class="bar-text"><span id="m-agua">100</span>%</p>
+            </div>
+
+            <button id="btn-passar-ano" class="btn-primary">Finalizar Ano e Colher Safra</button>
+        </aside>
+
+        <section class="center-stage">
+            
+            <h2>Mapa de Uso da Terra</h2>
+            <div class="farm-grid">
+                <div class="plot-card" data-plot="0" id="plot-0">
+                    <span class="plot-number">LOTE 1</span>
+                    <p class="plot-status">Vazio / Descanso</p>
+                    <div class="plot-stats">Solo: 100%</div>
+                </div>
+                <div class="plot-card" data-plot="1" id="plot-1">
+                    <span class="plot-number">LOTE 2</span>
+                    <p class="plot-status">Vazio / Descanso</p>
+                    <div class="plot-stats">Solo: 100%</div>
+                </div>
+                <div class="plot-card" data-plot="2" id="plot-2">
+                    <span class="plot-number">LOTE 3</span>
+                    <p class="plot-status">Vazio / Descanso</p>
+                    <div class="plot-stats">Solo: 100%</div>
+                </div>
+                <div class="plot-card" data-plot="3" id="plot-3">
+                    <span class="plot-number">LOTE 4</span>
+                    <p class="plot-status">Vazio / Descanso</p>
+                    <div class="plot-stats">Solo: 100%</div>
+                </div>
+            </div>
+
+            <div id="control-panel" class="control-panel inactive">
+                <h3>Gerenciar: <span id="selected-plot-title">Nenhum lote selecionado</span></h3>
+                <p class="panel-hint">Selecione um lote no mapa acima para ordenar o plantio ou manejo.</p>
+                <div class="action-buttons-group">
+                    <button class="btn-action" data-action="soja">Monocultura de Soja</button>
+                    <button class="btn-action" data-action="rotacao">Rotação com Leguminosas</button>
+                    <button class="btn-action" data-action="floresta">Reflorestamento (Reserva Legal)</button>
+                    <button class="btn-action" data-action="limpar">Arar e Deixar em Pousio</button>
+                </div>
+            </div>
+        </section>
+
+        <aside class="right-panel">
+            <div class="shop-section">
+                <h2>Tecnologias de Precisão</h2>
+                <div class="shop-list">
+                    <div class="shop-item" id="shop-gotejamento">
+                        <div class="shop-info">
+                            <h4>Irrigação Inteligente</h4>
+                            <p>Reduz perda de água em anos de seca. Cost: R$ 400</p>
+                        </div>
+                        <button class="btn-buy" data-upgrade="gotejamento">Comprar</button>
+                    </div>
+                    <div class="shop-item" id="shop-biofabrica">
+                        <div class="shop-info">
+                            <h4>Biofábrica Local</h4>
+                            <p>Gera bónus de nutrientes biológicos. Cost: R$ 300</p>
+                        </div>
+                        <button class="btn-buy" data-upgrade="biofabrica">Comprar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="log-section">
+                <h2>Alertas e Eventos do Clima</h2>
+                <div id="event-ticker">
+                    <p class="log-entry system">Simulador iniciado. Configure os seus lotes de terra.</p>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <div id="end-screen" class="overlay hidden">
+        <div class="modal">
+            <h2 id="end-title">Relatório Final do Governo Safra</h2>
+            <div id="end-report-body"></div>
+            <button id="btn-restart" class="btn-primary">Iniciar Nova Simulação</button>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <p>Desenvolvido com fins pedagógicos para o Concurso Agrinho 2026. Lógica complexa aplicada via Vanilla JavaScript.</p>
+    </footer>
+
+    <script src="js/engine.js"></script>
+</body>
+</html>
