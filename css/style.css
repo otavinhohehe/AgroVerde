@@ -1,1 +1,177 @@
+:root {
+    --bg-dark: #090d16;
+    --bg-panel: #131c2e;
+    --bg-hover: #1e2d4a;
+    --primary: #10b981;
+    --primary-hover: #059669;
+    --blue: #3b82f6;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --danger: #ef4444;
+}
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    line-height: 1.4;
+}
+
+/* HEADER */
+.main-header {
+    background-color: var(--bg-panel);
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--bg-hover);
+}
+
+.main-header h1 { color: var(--primary); font-size: 1.8rem; }
+.global-turn-box { text-align: center; background: var(--bg-dark); padding: 0.5rem 1rem; border-radius: 6px; }
+.global-turn-box span { font-size: 0.75rem; color: var(--text-muted); }
+.global-turn-box p { font-size: 1.5rem; font-weight: bold; color: var(--primary); }
+
+/* LAYOUT PRINCIPAL (TRÊS COLUNAS NO DESKTOP) */
+.main-layout {
+    max-width: 1400px;
+    margin: 1.5rem auto;
+    padding: 0 1rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+    .main-layout {
+        grid-template-columns: 300px 1fr 350px;
+    }
+}
+
+/* ASIDES E SECÇÕES */
+aside, section {
+    background-color: var(--bg-panel);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+h2 { font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 1.2rem; border-left: 3px solid var(--primary); padding-left: 0.5rem; }
+
+/* INDICADORES */
+.metric-group { margin-bottom: 1.2rem; }
+.metric-group label { font-size: 0.85rem; color: var(--text-muted); }
+.metric-value { font-size: 1.6rem; font-weight: bold; }
+.metric-value.positive { color: var(--primary); }
+
+.bar-container { background: var(--bg-dark); height: 8px; border-radius: 4px; overflow: hidden; margin-top: 0.3rem; }
+.bar-fill { height: 100%; width: 100%; transition: width 0.5s ease; }
+.bar-fill.green { background-color: var(--primary); }
+.bar-fill.blue { background-color: var(--blue); }
+.bar-text { font-size: 0.8rem; text-align: right; color: var(--text-muted); }
+
+/* GRADE DA FAZENDA (CSS GRID 2x2) */
+.farm-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.plot-card {
+    background-color: var(--bg-dark);
+    border: 2px solid #27354f;
+    padding: 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-height: 110px;
+}
+
+.plot-card:hover { border-color: var(--primary); transform: scale(1.01); }
+.plot-card.selected { border-color: var(--blue); background-color: rgba(59, 130, 246, 0.05); }
+
+.plot-number { font-size: 0.75rem; color: var(--text-muted); font-weight: bold; }
+.plot-status { font-size: 1.2rem; font-weight: bold; margin: 0.2rem 0; }
+.plot-stats { font-size: 0.85rem; color: var(--primary); }
+
+/* Cores dinâmicas para o estado das terras */
+.plot-soja { color: #eab308; }
+.plot-rotacao { color: #22c55e; }
+.plot-floresta { color: #047857; }
+
+/* PAINEL DE CONTROLO */
+.control-panel { background: var(--bg-dark); padding: 1rem; border-radius: 6px; border: 1px dashed #27354f; transition: opacity 0.3s; }
+.control-panel.inactive { opacity: 0.4; pointer-events: none; }
+.panel-hint { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.8rem; }
+
+.action-buttons-group { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+.btn-action { background: var(--bg-panel); border: 1px solid #27354f; color: white; padding: 0.6rem; border-radius: 4px; cursor: pointer; font-size: 0.85rem; }
+.btn-action:hover { background: var(--bg-hover); border-color: var(--text-muted); }
+
+/* LOJA E FEED */
+.shop-list { display: flex; flex-direction: column; gap: 0.8rem; }
+.shop-item { display: flex; justify-content: space-between; align-items: center; background: var(--bg-dark); padding: 0.8rem; border-radius: 6px; }
+.shop-info h4 { font-size: 0.9rem; color: var(--text-main); }
+.shop-info p { font-size: 0.75rem; color: var(--text-muted); }
+
+.btn-buy { background: var(--blue); border: none; color: white; padding: 0.4rem 0.8rem; border-radius: 4px; cursor: pointer; font-size: 0.8rem; font-weight: bold; }
+.btn-buy:hover { background: #2563eb; }
+.btn-buy.owned { background: #475569; cursor: not-allowed; }
+
+#event-ticker { height: 180px; background: var(--bg-dark); padding: 0.8rem; border-radius: 6px; overflow-y: auto; font-family: monospace; font-size: 0.8rem; }
+.log-entry { margin-bottom: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.02); padding-bottom: 0.2rem; }
+.log-entry.system { color: #38bdf8; }
+.log-entry.alert { color: var(--danger); }
+.log-entry.reward { color: var(--primary); }
+
+/* BOTÕES GERAIS */
+.btn-primary { background: var(--primary); border: none; color: var(--bg-dark); font-weight: bold; padding: 0.8rem; width: 100%; border-radius: 6px; cursor: pointer; font-size: 1rem; transition: background 0.2s; }
+.btn-primary:hover { background: var(--primary-hover); }
+
+/* OVERLAY MODAL */
+.overlay { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.85); display:flex; justify-content:center; align-items:center; z-index:100; }
+.modal { background: var(--bg-panel); border: 2px solid var(--primary); padding: 2rem; border-radius: 12px; max-width: 550px; width: 90%; text-align: center; }
+.modal h2 { border: none; color: var(--primary); font-size: 1.6rem; }
+#end-report-body { text-align: left; margin: 1.5rem 0; font-size: 0.95rem; color: #cbd5e1; }
+.hidden { display: none !important; }
+.main-footer { text-align: center; padding: 1.5rem; color: var(--text-muted); font-size: 0.8rem; margin-top: 2rem; }
+/* ESTILOS ESPECÍFICOS DA TELA DE INTRODUÇÃO */
+.intro-modal {
+    max-width: 650px; /* Um pouco mais larga para caber o texto confortavelmente */
+    text-align: left !important;
+}
+.intro-modal h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+.intro-modal h3 {
+    color: var(--primary);
+    font-size: 1rem;
+    margin-top: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+.intro-story {
+    background: var(--bg-dark);
+    padding: 1rem;
+    border-radius: 6px;
+    border-left: 4px solid var(--blue);
+    font-style: italic;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+.intro-rules {
+    padding-left: 1.2rem;
+    font-size: 0.9rem;
+    color: #cbd5e1;
+}
+.intro-rules li {
+    margin-bottom: 0.5rem;
+}
